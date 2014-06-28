@@ -7,8 +7,8 @@ $ = jQuery;
 jQuery(function() {
 
   var $button, $answer, $question, $results, questions = [], answers = [],
-    question, $result, answer, first = true, correct = 0, total = 100, i, a, b,
-    timeout, time = 180, timer, remaining = time, $progress, progress = 0,
+    question, $result, answer, first = true, correct = 0, total = 20, i, a, b,
+    timeout, time = 80, timer, remaining = time, $progress, progress = 0,
     countdownTimer, operation = '+', $operations, $selected, $blurb, config = {
       '+' : {
         min: 0,
@@ -47,8 +47,8 @@ jQuery(function() {
     $selected.parent().addClass('active');
     if (!first) {
       finish();
-      resetProgress();
     }
+    resetProgress();
     activeConfig = config[operation];
     $blurb.text($selected.text() + ' practice ' + activeConfig.min + '-' + activeConfig.max);
   });
@@ -58,18 +58,22 @@ jQuery(function() {
     for (i = 0; i < total; i++) {
       a = Math.round(activeConfig.max * Math.random());
       b = Math.round(activeConfig.max * Math.random());
-      while (b > a || (operation == '%' && b == 0)) {
+      while ((operation == '-' && b > a) || (operation == '/' && (b == 0))) {
         b = Math.round(activeConfig.max * Math.random());
       }
+      if (operation == '/') {
+        a = b * a;
+      }
       questions.push({
-        from: a,
-        take: b
+        first: a,
+        second: b
       });
     }
     answers = [];
   }
 
   function finish(outOfTime) {
+    window.clearTimeout(timeout);
     while (answers.length) {
       $result = $('<div class="alert"></alert>');
       answer = answers.shift();
@@ -80,12 +84,13 @@ jQuery(function() {
       }
       else {
         $result.addClass('alert-error');
-        $result.html(answer.question + '<del>' + answer.answer + '</del> ' + answer.correct);
+        $result.html(answer.question + ' <del>' + answer.answer + '</del> ' + answer.correct);
       }
       $results.append($result);
     }
     if (outOfTime) {
       $results.prepend($('<h2></h2>').text('Time\'s Up!: ' + correct + ' out of ' + total + ' (' + Math.round(correct * 100/total) + '%)'));
+      $('#timer').text('Out of time!');
     }
     else {
       $results.prepend($('<h2></h2>').text(correct + ' out of ' + total + ' (' + Math.round(correct * 100/total) + '%)'));
@@ -96,6 +101,7 @@ jQuery(function() {
     first = true;
     correct = 0;
     progress = 0;
+    remaining = time;
     window.clearInterval(countdownTimer);
     window.clearTimeout(timer);
   }
@@ -159,22 +165,22 @@ jQuery(function() {
       if (!first) {
         evaluateAnswer();
       }
-      $question.text(question.from + ' ' + activeConfig.display + ' ' + question.take + ' =');
+      $question.text(question.first + ' ' + activeConfig.display + ' ' + question.second + ' =');
       switch (operation) {
         case '+':
-          $question.attr('data-answer', parseInt(question.from) + parseInt(question.take));
+          $question.attr('data-answer', parseInt(question.first) + parseInt(question.second));
           break;
 
         case '-':
-          $question.attr('data-answer', parseInt(question.from) - parseInt(question.take));
+          $question.attr('data-answer', parseInt(question.first) - parseInt(question.second));
           break;
 
         case '*':
-          $question.attr('data-answer', parseInt(question.from) * parseInt(question.take));
+          $question.attr('data-answer', parseInt(question.first) * parseInt(question.second));
           break;
 
         case '%':
-          $question.attr('data-answer', parseInt(question.from) % parseInt(question.take));
+          $question.attr('data-answer', parseInt(question.first) / parseInt(question.second));
           break;
 
       }
@@ -184,6 +190,7 @@ jQuery(function() {
     else {
       evaluateAnswer();
       $('#timer').text('Finished!');
+
       finish();
     }
   })
