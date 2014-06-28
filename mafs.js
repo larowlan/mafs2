@@ -10,7 +10,7 @@ jQuery(function() {
   function seedQuestions() {
     var min = 0, max = 20, i, a, b;
     questions = [];
-    for (i = 0; i < 5; i++) {
+    for (i = 0; i < 20; i++) {
       a = Math.round(max * Math.random());
       b = Math.round(max * Math.random());
       while (b > a) {
@@ -56,6 +56,12 @@ jQuery(function() {
     }
     else {
       // All questions done.
+      answers.push({
+        question: $question.text(),
+        answer: $answer.val(),
+        right: parseInt($question.attr('data-answer')) == parseInt($answer.val()),
+        correct: parseInt($question.attr('data-answer'))
+      });
       while (answers.length) {
         $result = $('<div class="alert"></alert>');
         answer = answers.shift();
