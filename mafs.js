@@ -1,14 +1,9 @@
 $ = jQuery;
-
-/*
- @todo Progress bar
- */
-
 jQuery(function() {
 
   var $button, $answer, $question, $results, questions = [], answers = [],
-    question, $result, answer, first = true, correct = 0, total = 20, i, a, b,
-    timeout, time = 80, timer, remaining = time, $progress, progress = 0,
+    question, $result, answer, first = true, correct = 0, total = 100, i, a, b,
+    timeout, time = 180, timer, remaining = time, $progress, progress = 0,
     countdownTimer, operation = '+', $operations, $selected, $blurb, config = {
       '+' : {
         min: 0,
@@ -139,7 +134,6 @@ jQuery(function() {
     }}, 500);
   });
   $button.click(function() {
-    $answer.focus();
     if (!first && $answer.val() == '') {
       // No null submissions.
       return;
@@ -160,6 +154,7 @@ jQuery(function() {
         $('#timer').text(remaining + 's');
       }, 1000);
     }
+    $answer.focus();
     if (questions.length) {
       question = questions.pop();
       if (!first) {
