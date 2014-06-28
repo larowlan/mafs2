@@ -174,7 +174,7 @@ jQuery(function() {
           $question.attr('data-answer', parseInt(question.first) * parseInt(question.second));
           break;
 
-        case '%':
+        case '/':
           $question.attr('data-answer', parseInt(question.first) / parseInt(question.second));
           break;
 
