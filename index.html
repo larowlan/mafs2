@@ -5,17 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="./mafs.css" rel="stylesheet" media="screen">
     <meta charset="UTF-8">
 </head>
 <body>
 <div class="hero-unit">
     <h1>Ready, set, mafs!</h1>
-    <p>Subtraction practice 0-20.</p>
-    <form>
-        <label for="answer" id="question">Are you ready...</label>
-        <input id="answer" type="number" value="" disabled="disabled">
-        <a class="btn btn-primary btn-large" id="submit" data-state="start">Start</a>
-    </form>
+    <p id="blurb">Addition practice 0-20.</p>
+    <ul id="operations" class="nav nav-pills">
+        <li class="active">
+            <a href="#" data-operation="+">Addition</a>
+        </li>
+        <li><a href="#" data-operation="-">Subtraction</a></li>
+        <li><a href="#" data-operation="*">Multiplication</a></li>
+        <li><a href="#" data-operation="/">Division</a></li>
+    </ul>
+    <div class="well">
+        <form class="form-inline">
+            <label for="answer" id="question">Are you ready...</label>
+            <input id="answer" type="number" value="" disabled="true">
+            <a class="btn btn-primary btn-large" id="submit" data-state="start">Start</a>
+        </form>
+    </div>
+    <div class="progress progress-success">
+        <div class="bar" id="progress" style="width: 0%;"></div>
+    </div>
+    <div class="navbar">
+        <div class="navbar-inner">
+            <a class="brand" href="#">Time:</a>
+            <ul class="nav">
+                <li class="active"><a href="#" id="timer">180s</a></li>
+            </ul>
+        </div>
+    </div>
+
 </div>
 <div id="results"></div>
 <script src="http://code.jquery.com/jquery.js"></script>

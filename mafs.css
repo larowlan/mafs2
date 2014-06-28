@@ -1,0 +1,11 @@
+#results .alert {
+    float: left;
+    width: 100px;
+    margin: 5px 10px;
+}
+#results h2 {
+    margin: 10px;
+}
+#answer {
+    width: 6em;
+}
