@@ -1,0 +1,21 @@
+{
+  "name": "mafs",
+  "main": "mafs.js",
+  "version": "0.0.1",
+  "homepage": "https://larowlan.github.io/mafs",
+  "authors": [
+    "Lee Rowlands <lee.rowlands@previousnext.com.au>"
+  ],
+  "description": "Maths training for primary-school students",
+  "moduleType": [
+    "amd"
+  ],
+  "keywords": [
+    "subtraction",
+    "addition",
+    "multiplication",
+    "division"
+  ],
+  "license": "GPL",
+  "private": true
+}
