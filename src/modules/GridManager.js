@@ -60,11 +60,7 @@ GridManager.prototype.cellClicked = function(cell) {
     }
   }
   this.enabled = [];
-  this.game.updateCurrent(cell.getValue());
   cell.setState('selected');
-  if (this.game.toFar()) {
-    cell.setState('invalid');
-  }
   var adjacent = this.calculateAdjacent(x, y);
   for (i in adjacent) {
     if (adjacent.hasOwnProperty(i)) {
@@ -80,6 +76,10 @@ GridManager.prototype.cellClicked = function(cell) {
   this.head = cell;
   cell.enable(this.cellReset);
   this.enabled.push(cell);
+  this.game.updateCurrent(cell.getValue());
+  if (this.game.toFar()) {
+    cell.setState('invalid');
+  }
 };
 
 GridManager.prototype.cellReset = function(cell) {
