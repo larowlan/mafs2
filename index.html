@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Mafs!</title>
+    <title>Mafs 2!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
@@ -11,9 +11,10 @@
 </head>
 <body>
 <div class="hero-unit">
-    <h1>Ready, set, mafs!</h1>
+    <h1>Mafs 2: bridges!</h1>
 
     <p id="blurb">Addition practice 0-20.</p>
+    <p id="help">Get across the grid!</p>
     <ul id="operations" class="nav nav-pills">
         <li class="active">
             <a href="#" data-operation="+">Addition</a>
@@ -22,56 +23,81 @@
         <li><a href="#" data-operation="*">Multiplication</a></li>
         <li><a href="#" data-operation="/">Division</a></li>
     </ul>
-    <div class="well">
-        <form class="form-inline">
-            <label for="answer" id="question">Are you ready...</label>
-            <input id="answer" type="number" value="" disabled="true">
-            <a class="btn btn-primary btn-large" id="submit" data-state="start">Start</a>
-        </form>
-    </div>
-    <div class="progress progress-success">
-        <div class="bar" id="progress" style="width: 0%;"></div>
+    <div class="well clearfix" id="outer">
+        <table id="grid" class="grid">
+            <tbody>
+                <tr>
+                    <td rowspan="4" class="endpoint"><div class="endpoint-inner"><p class="small">From</p><div id="from"></div></div></td>
+                    <td><div class="inner"></div></td>
+                    <td><div class="inner"></div></td>
+                    <td><div class="inner"></div></td>
+                    <td><div class="inner"></div></td>
+                    <td rowspan="4" class="endpoint"><div class="endpoint-inner"><p class="small">To</p><div id="to"></div></div></td>
+                </tr>
+                <tr>
+                    <td><div class="inner"></div></td>
+                    <td><div class="inner"></div></td>
+                    <td><div class="inner"></div></td>
+                    <td><div class="inner"></div></td>
+                </tr>
+                <tr>
+                    <td><div class="inner"></div></td>
+                    <td><div class="inner"></div></td>
+                    <td><div class="inner"></div></td>
+                    <td><div class="inner"></div></td>
+                </tr>
+                <tr>
+                    <td><div class="inner"></div></td>
+                    <td><div class="inner"></div></td>
+                    <td><div class="inner"></div></td>
+                    <td><div class="inner"></div></td>
+                </tr>
+                <tr>
+                    <td colspan="6" class="gutter"><div class="gutter-inner"><p class="small">Current</p><div id="current"></div></div></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     <div class="navbar">
         <div class="navbar-inner">
+            <a class="brand" href="#">Score:</a>
+            <ul class="nav">
+                <li class="active"><a href="#" id="score">0</a></li>
+            </ul>
             <a class="brand" href="#">Time:</a>
             <ul class="nav">
-                <li class="active"><a href="#" id="timer">180s</a></li>
+                <li class="active"><a href="#" id="timer">30s</a></li>
             </ul>
         </div>
     </div>
 </div>
 <p id="footer">
     <small>&copy; <a href="http://github.com/larowlan">@larowlan</a> - <a
-            href="https://github.com/larowlan/mafs/issues">feedback</a>.
+            href="https://github.com/larowlan/mafs2/issues">feedback</a>.
     </small>
 <div class="share">
-    <a href="http://twitter.com/share?url=http%3A//larowlan.github.io/mafs&amp;text=Mafs!"
+    <a href="http://twitter.com/share?url=http%3A//larowlan.github.io/mafs2&amp;text=Mafs 2!"
        title="Share this on Twitter" class="share share-twitter"
        rel="nofollow">
-        <img typeof="foaf:Image"
-           src="assets/icons//twitter.png"
+        <img src="assets/icons/twitter.png"
            alt="Twitter logo">
     </a>
-    <a href="http://www.facebook.com/sharer.php?u=http%3A//larowlan.github.io/mafs&amp;t=Mafs!"
+    <a href="http://www.facebook.com/sharer.php?u=http%3A//larowlan.github.io/mafs2&amp;t=Mafs 2!"
         title="Share on Facebook" class="service-links-facebook ext"
         rel="nofollow">
-        <img typeof="foaf:Image"
-            src="assets/icons//facebook.png"
+        <img src="assets/icons/facebook.png"
             alt="Facebook logo">
     </a>
-    <a href="https://plus.google.com/share?url=http%3A//larowlan.github.io/mafs"
+    <a href="https://plus.google.com/share?url=http%3A//larowlan.github.io/mafs2"
         title="Share this on Google+" class="service-links-google-plus ext"
         rel="nofollow">
-        <img typeof="foaf:Image"
-            src="assets/icons//google_plus.png"
+        <img src="assets/icons/google_plus.png"
             alt="Google+ logo">
     </a>
-    <a href="mailto:?subject=Mafs!&amp;body=http%3A//larowlan.github.io/mafs"
+    <a href="mailto:?subject=Mafs2!&amp;body=http%3A//larowlan.github.io/mafs2"
         title="Share via email" class="service-links-email mailto"
         rel="nofollow">
-        <img typeof="foaf:Image"
-            src="assets/icons//email.png"
+        <img src="assets/icons/email.png"
             alt="email logo">
     </a>
 </div>

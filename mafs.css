@@ -15,3 +15,103 @@
 .share {
     padding-left: 10px;
 }
+#grid {
+    width: 372px;
+    height: 372px;
+    color: #032136;
+    margin: 0 auto;
+}
+.clearfix:after {
+    clear: both;
+    content: '.';
+    visibility: hidden;
+    height: 0px;
+    display: block;
+}
+.color-primary-0 { color: #328A2E }
+.color-primary-1 { color: #8DCF8A }
+.color-primary-2 { color: #5AAC56 }
+.color-primary-3 { color: #166711 }
+.color-primary-4 { color: #034500 }
+
+.color-secondary-1-0 { color: #29516D }
+.color-secondary-1-1 { color: #708EA4 }
+.color-secondary-1-2 { color: #486E88 }
+.color-secondary-1-3 { color: #123752 }
+.color-secondary-1-4 { color: #032136 }
+
+.color-secondary-2-0 { color: #AA7939 }
+.color-secondary-2-1 { color: #FFDAAA }
+.color-secondary-2-2 { color: #D4A66A }
+.color-secondary-2-3 { color: #805115 }
+.color-secondary-2-4 { color: #553000 }
+
+.color-complement-0 { color: #A8383B }
+.color-complement-1 { color: #FDA9AB }
+.color-complement-2 { color: #D3696C }
+.color-complement-3 { color: #7E1518 }
+.color-complement-4 { color: #540002 }
+
+#grid {
+    width: 100%;
+    max-width: 512px;
+}
+#grid tr td {
+    width: 15%;
+    box-sizing: border-box;
+    border:2px solid #F5F5F5;
+    min-height: 60px;
+    max-width: 60px;
+    background-color: #FFDDAA;
+    vertical-align: middle;
+    text-align: center;
+}
+#grid tr td .inner {
+    min-height: 60px;
+    width: 100%;
+}
+#grid tr td.endpoint {
+    width: 20%;
+    max-width: 120px;
+    background-color: transparent;
+}
+#from, #to {
+    font-size: 2em;
+}
+.endpoint .endpoint-inner,
+#grid tr td.gutter .gutter-inner {
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.05) inset;
+    border: 1px solid #E3E3E3;
+    border-radius: 4px;
+    padding: 0 20px 40px;
+    min-height: 20px;
+    color: #939393;
+}
+.endpoint .endpoint-inner {
+    margin: 25% 10px;
+    text-align: center;
+}
+#grid tr td.gutter {
+    background-color: transparent;
+}
+#grid tr td.gutter .gutter-inner {
+    margin: 20px auto 0;
+    width: 10%;
+    max-width: 100px;
+}
+#outer {
+    padding: 20px;
+}
+#score {
+    min-width: 100px;
+    text-align: right;
+}
+#grid tr td.selected {
+    background-color: #5AAC56;
+}
+#grid tr td.adjacent {
+    background-color: #8DCF8A;
+}
+#grid tr td.invalid {
+    background-color: #A8383B;
+}

@@ -4,7 +4,7 @@
  * @param timerEl
  * @param operationsEl
  * @param blurbEl
- * @param progressEl
+ * @param gridEl
  * @param questionEl
  * @param buttonEl
  * @param answerEl
@@ -12,14 +12,18 @@
  * @param $
  * @constructor
  */
-function Mafs(timerEl, operationsEl, blurbEl, progressEl, questionEl, buttonEl, answerEl, resultsEl, $) {
+function Mafs(timerEl, operationsEl, gridEl, blurbEl, fromEl, toEl, currentEl, proxy) {
   this.gameTime = 180;
-  this.total = 100;
-  this.timer = new Timer(timerEl, this.gameTime, this, $.proxy);
-  this.questions = new Questions(this, questionEl, buttonEl, answerEl, resultsEl, this.total, $);
-  this.progress = new Progress(progressEl, this.total);
-  this.selector = new Selector(operationsEl, blurbEl, this, $.proxy);
+  this.size = 4;
+  this.timer = new Timer(timerEl, this.gameTime, this, proxy);
+  this.gridManager = new GridManager(this.size, gridEl, proxy, this);
+  this.questions = new Questions(this, this.size, this.gridManager);
+  this.current = new Current(currentEl);
+  this.from = new Endpoint(fromEl);
+  this.to = new Endpoint(toEl);
+  this.selector = new Selector(operationsEl, blurbEl, this, proxy);
   this.first = true;
+  this.reset();
 }
 
 Mafs.prototype.isFirst = function() {
@@ -32,14 +36,38 @@ Mafs.prototype.setFirst = function(value) {
 }
 
 Mafs.prototype.reset = function(outOfTime) {
-  this.progress.reset();
-  this.questions.reset(outOfTime);
-  this.timer.reset(outOfTime ? 'Out of time!' : 'Finished!');
-  this.first = true;
-  window.clearTimeout(this.finish);
+  this.gridManager.rebuild(this.questions.calculateValues());
+  this.current.setValue(this.questions.getStart());
+  this.from.setValue(this.questions.getStart());
+  this.to.setValue(this.questions.getEnd());
 }
 
 Mafs.prototype.start = function() {
   this.setFirst(false);
   this.finish = window.setTimeout($.proxy(this.reset, this, [true]), this.gameTime * 1000);
+}
+
+Mafs.prototype.getOperation = function() {
+  return this.questions.operation;
+}
+
+Mafs.prototype.updateCurrent = function(value) {
+  this.current.updateCurrent(value, this.questions.operation);
+  if (this.current.getValue() == this.to.getValue()) {
+    this.reset();
+  }
+}
+
+Mafs.prototype.toFar = function() {
+  var currentValue = this.current.getValue();
+  var target = this.questions.getEnd();
+  switch(this.getOperation()) {
+    case '+':
+    case '*':
+      return currentValue > target;
+
+    case '-':
+    case '%':
+      return currentValue < target;
+  }
 }
