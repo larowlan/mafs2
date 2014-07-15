@@ -75,7 +75,7 @@
     max-width: 120px;
     background-color: transparent;
 }
-#from, #to {
+#from, #to, #current {
     font-size: 2em;
 }
 .endpoint .endpoint-inner,
@@ -114,4 +114,81 @@
 }
 #grid tr td.invalid {
     background-color: #A8383B;
+}
+
+@media (max-width:720px) {
+    .hero-unit {
+        padding: 10px 5px;
+        margin-bottom: 0;
+    }
+    .hero-unit h1 {
+        font-size: 2em;
+        line-height: 1em;
+        margin: 0;
+    }
+    #operations {
+        display: none;
+    }
+    .hero-unit p {
+        margin: 0.1em 0;
+        line-height: 1.4em;
+        font-size: 0.9em;
+    }
+    #outer, .well {
+        padding: 5px;
+    }
+    #outer {
+        margin: 0;
+    }
+    #from, #to, #current {
+        font-size: 1em;
+    }
+    #grid tr td.endpoint {
+        width: 10%;
+    }
+    .endpoint .endpoint-inner,
+    #grid tr td.gutter .gutter-inner {
+        padding: 5px;
+    }
+    .endpoint .endpoint-inner {
+      margin: 25% 0;
+    }
+    #grid tr td.gutter .gutter-inner {
+        width: auto;
+    }
+    #grid tr td.gutter {
+        width: auto;
+    }
+    .brand:first-child {
+        border-bottom: 1px solid #ccc;
+        margin-bottom: -1px;
+    }
+    .brand {
+        padding-left: 20px;
+    }
+    .nav li {
+        width: 100%;
+    }
+    .navbar {
+        margin-bottom: 0;
+    }
+    .navbar-inner {
+        padding: 0;
+    }
+    .brand, .nav {
+        box-sizing: border-box;
+        min-width: 50%;
+    }
+    .navbar .brand {
+        margin-left: 0;
+    }
+    .navbar .nav {
+        margin-right: 0;
+    }
+    #timer {
+        text-align: right;
+    }
+    #help {
+        display: none;
+    }
 }
