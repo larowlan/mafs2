@@ -51,15 +51,7 @@ GridManager.prototype.cellClicked = function(cell) {
   var x = cell.getX();
   var y = cell.getY();
   var i, c;
-  for (i in this.enabled) {
-    if (this.enabled.hasOwnProperty(i)) {
-      if (!this.enabled[i].hasState('selected') && !this.enabled[i].hasState('invalid')) {
-        this.enabled[i].setState('');
-        this.enabled[i].disable();
-      }
-    }
-  }
-  this.enabled = [];
+  this.toggleEnabled();
   cell.setState('selected');
   var adjacent = this.calculateAdjacent(x, y);
   for (i in adjacent) {
@@ -85,9 +77,39 @@ GridManager.prototype.cellClicked = function(cell) {
 GridManager.prototype.cellReset = function(cell) {
   cell.setState('');
   if (cell.getLast()) {
+    this.game.updateCurrent(-1 * (cell.getValue() + cell.getLast().getValue()));
+    var oldLast = cell.getLast().getLast();
+    this.head = cell.getLast();
     this.cellClicked(cell.getLast());
+    cell.getLast().setLast(oldLast);
+  }
+  else {
+    // Game is in default state.
+    this.game.updateCurrent(-1 * cell.getValue());
+    this.toggleEnabled();
+    // Re-enable first-column cells.
+    for (var i = 0; i < this.size; i++) {
+      var c = this.cells[0][i];
+      if (!c.hasState('selected') && !c.hasState('invalid')) {
+        c.enable(this.cellClicked);
+        this.enabled.push(c);
+        c.setState('adjacent');
+      }
+    }
   }
 };
+
+GridManager.prototype.toggleEnabled = function() {
+  for (i in this.enabled) {
+    if (this.enabled.hasOwnProperty(i)) {
+      if (!this.enabled[i].hasState('selected') && !this.enabled[i].hasState('invalid')) {
+        this.enabled[i].setState('');
+      }
+      this.enabled[i].disable();
+    }
+  }
+  this.enabled = [];
+}
 
 GridManager.prototype.calculateAdjacent = function(x, y, exclude) {
   exclude = exclude || '';

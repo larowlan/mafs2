@@ -22,8 +22,8 @@ Cell.prototype.disable = function() {
   this.el.unbind('click.mafs');
 }
 
-Cell.prototype.enable = function(event) {
-  this.el.bind('click.mafs', this.proxy(this.manager.cellClicked, this.manager, this));
+Cell.prototype.enable = function(callback) {
+  this.el.bind('click.mafs', this.proxy(callback, this.manager, this));
 }
 
 Cell.prototype.getValue = function() {
